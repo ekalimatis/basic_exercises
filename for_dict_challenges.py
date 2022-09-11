@@ -61,7 +61,15 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+
+for n, clas in enumerate(school_students,1):
+    names={}
+    max_name=''
+    for student in clas:
+        names[student['first_name']]=names.setdefault(student['first_name'],0)+1
+        if names.get(student['first_name'],0) > names.get(max_name,0):
+            max_name=student['first_name']
+    print(f'Самое частое имя в классе {n}: {max_name}')
 
 
 # Задание 4
@@ -82,7 +90,16 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+
+for clas in school:
+    male=0
+    female=0
+    for student in clas['students']:
+        if is_male[student['first_name']]:
+            male+=1
+        else:
+            female+=1
+    print(f"Класс {clas['class']}: девочки {female}, мальчики {male}")
 
 
 # Задание 5
@@ -101,5 +118,19 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
-
+max_male_clas = {}
+max_female_clas = {}
+for clas in school:
+    male=0
+    female=0
+    for student in clas['students']:
+        if is_male[student['first_name']]:
+            male+=1
+        else:
+            female+=1
+    if male > max_male_clas.get('count',0):
+        max_male_clas = {'class': clas['class'], 'count': male}
+    if female > max_female_clas.get('count',0):
+        max_female_clas = {'class': clas['class'], 'count': female}
+print(f"Больше всего мальчиков в классе {max_male_clas['class']}")
+print(f"Больше всего мальчиков в классе {max_female_clas['class']}")
