@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 # Задание 1
 # Дан список учеников, нужно посчитать количество повторений каждого имени ученика
 # Пример вывода:
@@ -13,10 +16,10 @@ students = [
     {'first_name': 'Петя'},
 ]
 
-names={}
+names_count = defaultdict(int)
 for student in students:
-    names[student['first_name']]=names.setdefault(student['first_name'],0)+1
-for name, count in names.items():
+    names_count[student['first_name']] += 1
+for name, count in names_count.items():
     print(f'{name}: {count}')
 
 # Задание 2
@@ -31,12 +34,10 @@ students = [
     {'first_name': 'Оля'},
 ]
 
-names={}
-max_name=''
+names_count = defaultdict(int)
 for student in students:
-    names[student['first_name']]=names.setdefault(student['first_name'],0)+1
-    if names.get(student['first_name'],0) > names.get(max_name,0):
-        max_name=student['first_name']
+    names_count[student['first_name']] += 1
+max_name = max(names_count, key=names_count.get)
 print(f'Самое частое имя среди учеников: {max_name}')
 
 # Задание 3
@@ -54,7 +55,8 @@ school_students = [
         {'first_name': 'Маша'},
         {'first_name': 'Маша'},
         {'first_name': 'Оля'},
-    ],[  # это – третий класс
+    ],
+    [  # это – третий класс
         {'first_name': 'Женя'},
         {'first_name': 'Петя'},
         {'first_name': 'Женя'},
@@ -62,14 +64,12 @@ school_students = [
     ],
 ]
 
-for n, clas in enumerate(school_students,1):
-    names={}
-    max_name=''
+for n, clas in enumerate(school_students, 1):
+    names_count = defaultdict(int)
     for student in clas:
-        names[student['first_name']]=names.setdefault(student['first_name'],0)+1
-        if names.get(student['first_name'],0) > names.get(max_name,0):
-            max_name=student['first_name']
-    print(f'Самое частое имя в классе {n}: {max_name}')
+        names_count[student['first_name']] += 1
+    most_frequent_name = max(names_count, key=names_count.get)
+    print(f'Самое частое имя в классе {n}: {most_frequent_name}')
 
 
 # Задание 4
@@ -92,13 +92,13 @@ is_male = {
 }
 
 for clas in school:
-    male=0
-    female=0
+    male = 0
+    female = 0
     for student in clas['students']:
         if is_male[student['first_name']]:
-            male+=1
+            male += 1
         else:
-            female+=1
+            female += 1
     print(f"Класс {clas['class']}: девочки {female}, мальчики {male}")
 
 
@@ -121,16 +121,16 @@ is_male = {
 max_male_clas = {}
 max_female_clas = {}
 for clas in school:
-    male=0
-    female=0
+    male = 0
+    female = 0
     for student in clas['students']:
         if is_male[student['first_name']]:
-            male+=1
+            male += 1
         else:
-            female+=1
-    if male > max_male_clas.get('count',0):
+            female += 1
+    if male > max_male_clas.get('count', 0):
         max_male_clas = {'class': clas['class'], 'count': male}
-    if female > max_female_clas.get('count',0):
+    if female > max_female_clas.get('count', 0):
         max_female_clas = {'class': clas['class'], 'count': female}
 print(f"Больше всего мальчиков в классе {max_male_clas['class']}")
 print(f"Больше всего мальчиков в классе {max_female_clas['class']}")

@@ -28,9 +28,11 @@ is_male = {
 names = ['Оля', 'Петя', 'Вася', 'Маша']
 
 for name in names:
-    sex = is_male.get(name, 'Unknow')
-    if sex == True: sex = 'Man'
-    if sex == False: sex = 'Women'
+    sex = is_male.get(name, 'Unknown')
+    if sex:
+        sex = 'Man'
+    elif not sex:
+        sex = 'Women'
     print(f'{name} {sex}')
 
 
@@ -48,8 +50,8 @@ groups = [
 ]
 
 print(f'Всего {len(groups)} группы.')
-for n, group in enumerate(groups, 1):
-    print(f'Группа {n}: {len(group)} ученика.')
+for number, group in enumerate(groups, 1):
+    print(f'Группа {number}: {len(group)} ученика.')
 
 
 # Задание 5
@@ -64,5 +66,6 @@ groups = [
     ['Вася', 'Маша', 'Саша', 'Женя'],
 ]
 
-for n, group in enumerate(groups, 1):
-    print(f"Группа {n}: {' '.join(group)}")
+for number, group in enumerate(groups, 1):
+    group_names = ' '.join(group)
+    print(f"Группа {number}: {group_names}")

@@ -10,10 +10,11 @@ print(word.count('a'))
 
 # Вывести количество гласных букв в слове
 word = 'Архангельск'
-chars='АаЕеИиОоУуЫыЭэЯяЮю'
-count=0
-for ch in chars:
-    count+=word.count(ch)
+chars = {'А', 'а', 'Е', 'е', 'И', 'и', 'О', 'о', 'У', 'у', 'Ы', 'ы', 'Э', 'э', 'Я', 'я', 'Ю', 'ю'}
+count = 0
+for character in word:
+    if character in chars:
+        count += 1
 print(count)
 
 # Вывести количество слов в предложении
